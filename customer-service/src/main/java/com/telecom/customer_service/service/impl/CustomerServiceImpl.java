@@ -1,7 +1,7 @@
-
 package com.telecom.customer_service.service.impl;
 
 import com.telecom.customer_service.entity.Customer;
+import com.telecom.customer_service.exception.CustomerNotFoundException;
 import com.telecom.customer_service.repository.CustomerRepository;
 import com.telecom.customer_service.service.CustomerService;
 
@@ -25,7 +25,9 @@ public class CustomerServiceImpl implements CustomerService {
     public Customer getCustomerById(Long id) {
         return customerRepository.findById(id)
                 .orElseThrow(() ->
-                        new RuntimeException("Customer not found with id: " + id));
+                        new CustomerNotFoundException(
+                                "Customer not found with id: " + id
+                        ));
     }
 
     @Override
